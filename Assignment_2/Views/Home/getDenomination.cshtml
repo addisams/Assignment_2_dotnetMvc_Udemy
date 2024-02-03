@@ -1,0 +1,51 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.7.1.js"></script>
+    <script src="~/Scripts/popper.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+
+    <title>Get Denomination</title>
+</head>
+<body>
+    <div class="container-fluid">
+        @{
+            int[] denominations = { 1000, 500, 100, 10, 1 };
+        }
+        <h1>Generated denominations for Amount: @ViewBag.Amount</h1>
+        <table class="table">
+
+            <tr>
+                <td>Denominations</td>
+                <td>Count</td>
+                <td>Amount</td>
+            </tr>
+
+            @foreach (var denomination in denominations)
+            {
+                var count = ViewBag.Amount / denomination;
+                var amount = count * denomination;
+                if (count > 0)
+                {
+                    <tr>
+                        <td>@denomination</td>
+                        <td>@count</td>
+                        <td>@amount</td>
+                    </tr>
+                }
+                ViewBag.Amount = ViewBag.Amount % denomination;
+            }
+
+        </table>
+    </div>
+</body>
+</html>
+
